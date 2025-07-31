@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Girlfriend Day ❤️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Source+Code+Pro&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #ffd6e8, #ffe6f0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #d63384;
+      margin-bottom: 40px;
+      font-family: 'Pacifico', cursive;
+      text-shadow: 2px 2px #fff0f5;
+      z-index: 2;
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: -50px;
+      font-size: 1.5rem;
+      color: #ff4d88;
+      animation: floatUp 8s linear infinite;
+      pointer-events: none;
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-120vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    .envelope {
+      width: 180px;
+      height: 120px;
+      position: relative;
+      background: #fff;
+      border: 2px solid #d63384;
+      border-radius: 4px;
+      overflow: visible;
+      transition: transform 0.4s ease-in-out;
+      cursor: pointer;
+      z-index: 2;
+      margin: 0 auto;
+    }
+
+    .envelope-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #d63384;
+      clip-path: polygon(0 0, 50% 60%, 100% 0);
+      z-index: 2;
+      transition: transform 0.6s ease;
+      transform-origin: top center;
+    }
+
+    .envelope.open .envelope-top {
+      transform: rotateX(-180deg);
+    }
+
+    .heart {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      z-index: 3;
+      transition: opacity 0.4s ease;
+    }
+
+    .envelope.open .heart {
+      opacity: 0;
+    }
+
+    .letter {
+      max-width: 600px;
+      padding: 20px 40px;
+      background: white;
+      border: 2px solid #d63384;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: left;
+      white-space: pre-wrap;
+      z-index: 2;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 1em;
+      line-height: 1.6;
+      color: #333;
+      position: absolute;
+      top: 65%;
+      left: 50%;
+      transform: translate(-50%, 0%) scale(0.8);
+      opacity: 0;
+      display: none;
+    }
+
+    .letter.animate {
+      display: block;
+      animation: slideUpDown 3s ease forwards;
+    }
+
+    @keyframes slideUpDown {
+      0% {
+        transform: translate(-50%, 0%) scale(0.8);
+        opacity: 0;
+      }
+      40% {
+        transform: translate(-50%, -100%) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -70%) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .letter-content {
+      display: inline-block;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 0.6ch;
+      height: 1em;
+      background-color: #333;
+      vertical-align: bottom;
+      animation: blink 1s steps(1) infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy Girlfriend Day ❤️</h1>
+
+  <!-- Background music placeholder -->
+  <audio id="bgMusic" preload="auto" loop>
+    <source src="your-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const emojis = ['❤️', '💕', '💖', '💘', '💝'];
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDelay = Math.random() * 8 + 's';
+      heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(heart);
+    }
+  </script>
+
+  <div class="envelope" onclick="openLetter(this)">
+    <div class="envelope-top"></div>
+    <div class="heart">💌</div>
+  </div>
+
+  <div class="letter" id="loveLetter">
+    <div class="letter-content" id="letterContent">
+      <span id="typedText"></span><span class="cursor" id="cursor"></span>
+    </div>
+  </div>
+
+  <script>
+    const letterText = `Dear Andrea,
+
+Happy Girlfriend Day my babyy! 💖 Every moment with you is a priceless memory I will always cherish. Your presence gives me hope in this world and makes all of my problems feel lighter. I'm the luckiest man in the world because you chose me.
+
+Thank you for accepting and loving me for who I am. I can’t wait to spend more time with you—until the end of my time in this world. I love you no matter what happens in this damned world, and I love everything about you my Andrea even your flaws and imperfections. I'm sorry if sometimes I fall short as a boyfriend/person.
+
+With all my heart, mind and soul,
+❤️ Your Deyn`;
+
+    function openLetter(el) {
+      const top = el.querySelector('.envelope-top');
+      const heart = el.querySelector('.heart');
+      top.style.transform = 'rotateX(-180deg)';
+      heart.style.opacity = '0';
+
+      const music = document.getElementById('bgMusic');
+      if (music) {
+        music.play().catch(err => console.log('Autoplay blocked:', err));
+      }
+
+      setTimeout(() => {
+        const letter = document.getElementById('loveLetter');
+        letter.classList.add('animate');
+
+        setTimeout(() => {
+          const typedText = document.getElementById('typedText');
+          const cursor = document.getElementById('cursor');
+          typeWriter(letterText, typedText, cursor, 0);
+        }, 3000);
+      }, 800);
+    }
+
+    function typeWriter(text, element, cursor, index) {
+      if (index < text.length) {
+        element.textContent += text[index];
+        let delay = 80;
+        if ([".", "!", "?"].includes(text[index])) delay = 600;
+        else if ([",", ":", ";"].includes(text[index])) delay = 300;
+        else if (text[index] === "\n") delay = 500;
+        setTimeout(() => typeWriter(text, element, cursor, index + 1), delay);
+      } else {
+        cursor.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
